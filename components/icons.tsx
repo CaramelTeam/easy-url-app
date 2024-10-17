@@ -213,3 +213,61 @@ export const NextUILogo: React.FC<IconSvgProps> = (props) => {
     </svg>
   );
 };
+
+export const GoogleIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 48 48"
+      width={size || width}
+      height={size || height}
+      {...props}
+    >
+      <path
+        fill="#4285F4"
+        d="M24 9.5c3.08 0 5.48 1.08 7.16 2.59l5.28-5.28C32.65 3.73 28.69 2 24 2 15.73 2 8.68 7.48 6.15 14.99l6.9 5.37C14.52 13.94 18.87 9.5 24 9.5z"
+      />
+      <path
+        fill="#34A853"
+        d="M24 44c5.54 0 10.18-1.84 13.57-4.98l-6.5-5.1c-1.81 1.22-4.14 1.96-7.07 1.96-5.42 0-10.03-3.65-11.68-8.62l-7.02 5.46C9.22 38.74 16.05 44 24 44z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M42 24.5c0-1.13-.1-2.24-.31-3.31H24v7.02h10.32c-.45 2.3-1.77 4.25-3.65 5.56l6.5 5.1C40.69 35.98 42 30.54 42 24.5z"
+      />
+      <path
+        fill="#EA4335"
+        d="M13.32 27.26C12.97 26.14 12.75 25.09 12.75 24s.22-2.14.57-3.26l-6.9-5.37C4.82 18.22 4 21.03 4 24s.82 5.78 2.42 8.63l6.9-5.37z"
+      />
+    </svg>
+  );
+};
+
+export const XIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size || width}
+      height={size || height}
+      {...props}
+    >
+      <path
+        d="M3 3l18 18M3 21L21 3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
