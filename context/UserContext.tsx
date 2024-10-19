@@ -48,15 +48,17 @@ export const UserContextProvider = ({ children }: any) => {
                 email: localStorage.getItem('userEmail') as string,
                 isAuthenticaded: localStorage.getItem('isAuthenticaded') === 'true'
             })
+            // setError(false)
         } catch (error) {
+            // setError(true)
             console.log(error)
-            setError(true)
         }
     }
 
     const signUp = async (name: string, email: string, password: string) => {
         try {
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, { name, email, password })
+            setError(false)
         } catch (error) {
             setError(true)
             console.log(error);

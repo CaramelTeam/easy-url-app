@@ -34,7 +34,7 @@ export default function SignupPage() {
     const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await signUp(values.name.trim(), values.email, values.password.trim());
-        if (!error) return;
+        if (error) return;
         router.push('/login');
         setError(false);
     }

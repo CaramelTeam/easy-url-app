@@ -29,16 +29,14 @@ import { UserContextI, useUser } from "@/context/UserContext";
 import { User } from "@nextui-org/user";
 import { LogOut } from "lucide-react";
 import { deleteCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
-
 
 export const Navbar = () => {
   const { user } = useUser() as UserContextI;
-  const router = useRouter();
   const handleOnLogout = () => {
     localStorage.clear();
     deleteCookie('currentUser');
-    router.push('/login');
+    window.location.href = '/login';
+
   }
 
   return (

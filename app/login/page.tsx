@@ -25,14 +25,20 @@ export default function LoginPage() {
     });
 
     const [isVisible, setIsVisible] = useState(false);
-    const { login, error, setError } = useUser() as UserContextI;
+    // const { login, error, setError } = useUser() as UserContextI;
+    const { login } = useUser() as UserContextI;
     const toggleVisibility = () => setIsVisible(!isVisible);
 
     const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log('Click');
         await login(values.email, values.password);
-        router.push('/');
+        // console.log('error value before push:', error);
+        router.push('/tags');
+        // window.location.href = '/';
+        console.log('Pushing');
     }
+
     return (
         <div
             className="hover:translate-y-[-2px]"
@@ -68,17 +74,19 @@ export default function LoginPage() {
                             size="sm"
                             style={{ cursor: "pointer" }}
                             href="/signup"
-                            onClick={() => setError(false)}
+                        // onClick={() => setError(false)}
+
                         >
                             Registrate
                         </Link>
                     </div>
-                    {
+                    {/* {
                         error &&
                         <span
                             className="text-danger mt-2"
                         ><small>No se encontro ninguna coincidencia</small></span>
-                    }
+                    } */}
+
 
 
                 </CardHeader>
@@ -100,7 +108,7 @@ export default function LoginPage() {
                             onChange={handleOnChange}
                             isRequired
                             onInput={handleEmailInputs}
-                            isInvalid={error}
+                        // isInvalid={error}
                         >
                             Email
                         </Input>
@@ -111,7 +119,7 @@ export default function LoginPage() {
                             placeholder="Enter your password"
                             labelPlacement="outside"
                             isRequired
-                            isInvalid={error}
+                            // isInvalid={error}
                             endContent={
                                 <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
                                     {isVisible ? (
