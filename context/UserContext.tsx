@@ -7,6 +7,7 @@ export interface UserI {
     name: string;
     email: string;
     isAuthenticaded: boolean;
+    loading: boolean;
 }
 
 export interface UserContextI {
@@ -21,11 +22,27 @@ export interface UserContextI {
 export const UserContext = createContext({})
 export const UserContextProvider = ({ children }: any) => {
     const [user, setUser] = useState<UserI>({
-        _id: localStorage.getItem('user') as string ?? "",
-        name: localStorage.getItem('userName') as string ?? "",
-        email: localStorage.getItem('userEmail') as string ?? "",
-        isAuthenticaded: localStorage.getItem('isAuthenticaded') ? localStorage.getItem('isAuthenticaded') === 'true' : false
+        _id: '',
+        name: '',
+        email: '',
+        isAuthenticaded: false,
+        loading: true
+
     })
+
+    useEffect(() => {
+        const userInfo = {
+            _id: localStorage.getItem('user') as string || "",
+            name: localStorage.getItem('userName') as string || "",
+            email: localStorage.getItem('userEmail') as string || "",
+            isAuthenticaded: localStorage.getItem('isAuthenticaded') === 'true',
+            loading: false
+        }
+        setUser(userInfo)
+    }, [])
+
+
+
 
     const [error, setError] = useState(false)
 
@@ -46,12 +63,15 @@ export const UserContextProvider = ({ children }: any) => {
                 _id: localStorage.getItem('user') as string,
                 name: localStorage.getItem('userName') as string,
                 email: localStorage.getItem('userEmail') as string,
-                isAuthenticaded: localStorage.getItem('isAuthenticaded') === 'true'
+                isAuthenticaded: localStorage.getItem('isAuthenticaded') === 'true',
+                loading: false
             })
-            // setError(false)
+            setError(false)
+            return response;
         } catch (error) {
-            // setError(true)
+            setError(true)
             console.log(error)
+            return error;
         }
     }
 

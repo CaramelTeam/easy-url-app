@@ -1,29 +1,10 @@
 export type SiteConfig = typeof siteConfig;
+//TODO: add here public routes
 
 export const siteConfig = {
   name: "Next.js + NextUI",
   description: "Make beautiful websites regardless of your design experience.",
   navItems: [
-    // {
-    //   label: "Home",
-    //   href: "/",
-    // },
-    // {
-    //   label: "Docs",
-    //   href: "/docs",
-    // },
-    // {
-    //   label: "Pricing",
-    //   href: "/pricing",
-    // },
-    // {
-    //   label: "Blog",
-    //   href: "/blog",
-    // },
-    // {
-    //   label: "About",
-    //   href: "/about",
-    // },
     {
       label: "Home",
       href: "/",
@@ -72,7 +53,7 @@ export const siteConfig = {
     }
   ],
   links: {
-    github: "https://github.com/nextui-org/nextui",
+    github: "https://github.com/JimLoza",
     twitter: "https://twitter.com/getnextui",
     docs: "https://nextui.org",
     discord: "https://discord.gg/9b6yyZKmH4",

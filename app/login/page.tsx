@@ -1,6 +1,5 @@
 'use client';
-import { GithubIcon, GoogleIcon } from "@/components/icons";
-import { title } from "@/components/primitives";
+import { DiscordIcon, GithubIcon, GoogleIcon, TwitterIcon } from "@/components/icons";
 import { UserContextI, useUser } from "@/context/UserContext";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
@@ -11,7 +10,6 @@ import { Eye, EyeOff, Mail, XIcon } from "lucide-react";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
 import { useValidateInputs } from '../../hooks/useValidateInputs';
-import AboutLayout from '../about/layout';
 
 interface LoginFormValues {
     email: string;
@@ -25,18 +23,15 @@ export default function LoginPage() {
     });
 
     const [isVisible, setIsVisible] = useState(false);
-    // const { login, error, setError } = useUser() as UserContextI;
-    const { login } = useUser() as UserContextI;
+    const { login, error, setError } = useUser() as UserContextI;
     const toggleVisibility = () => setIsVisible(!isVisible);
 
     const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Click');
-        await login(values.email, values.password);
-        // console.log('error value before push:', error);
-        router.push('/tags');
-        // window.location.href = '/';
-        console.log('Pushing');
+        const result = await login(values.email, values.password);
+        if (result.status === 201) {
+            router.push('/');
+        }
     }
 
     return (
@@ -74,18 +69,18 @@ export default function LoginPage() {
                             size="sm"
                             style={{ cursor: "pointer" }}
                             href="/signup"
-                        // onClick={() => setError(false)}
+                            onClick={() => setError(false)}
 
                         >
                             Registrate
                         </Link>
                     </div>
-                    {/* {
+                    {
                         error &&
                         <span
                             className="text-danger mt-2"
                         ><small>No se encontro ninguna coincidencia</small></span>
-                    } */}
+                    }
 
 
 
@@ -108,7 +103,7 @@ export default function LoginPage() {
                             onChange={handleOnChange}
                             isRequired
                             onInput={handleEmailInputs}
-                        // isInvalid={error}
+                            isInvalid={error}
                         >
                             Email
                         </Input>
@@ -119,7 +114,7 @@ export default function LoginPage() {
                             placeholder="Enter your password"
                             labelPlacement="outside"
                             isRequired
-                            // isInvalid={error}
+                            isInvalid={error}
                             endContent={
                                 <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
                                     {isVisible ? (
@@ -169,7 +164,9 @@ export default function LoginPage() {
                             variant="light"
                             aria-label='google'
                         >
-                            <XIcon />
+                            {/* <XIcon /> */}
+                            {/* <TwitterIcon /> */}
+                            <DiscordIcon />
                         </Button>
 
                     </div>

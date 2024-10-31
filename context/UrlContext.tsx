@@ -33,12 +33,13 @@ export interface UrlContextI {
     addUrl: (urlInfo: UrlDtoI) => Promise<any>;
     refetch: () => void;
     deleteUrl: (id: string) => Promise<UrlInfoI>;
+    loading: boolean;
 }
 
 export const UrlContextProvider = ({ children }: any) => {
     const { user } = useUser() as UserContextI; // Get the user state
     const token = getCookie('currentUser'); // Get the token from the cookie
-
+    const [loading, setLoading] = useState(true);
     const [url, setUrl] = useState<UrlTagsI[]>([]);
     const getUrl = async () => {
         if (!user.isAuthenticaded) return;
@@ -57,6 +58,7 @@ export const UrlContextProvider = ({ children }: any) => {
                 return;
             }
             setUrl(data);
+            setLoading(false);
         } catch (error) {
             console.log('Entrando al error');
             console.log(error);
@@ -99,7 +101,7 @@ export const UrlContextProvider = ({ children }: any) => {
 
 
     return (
-        <UrlContext.Provider value={{ url, addUrl, refetch: getUrl, deleteUrl }}>
+        <UrlContext.Provider value={{ url, addUrl, refetch: getUrl, deleteUrl, loading }}>
             {children}
         </UrlContext.Provider>
     )

@@ -1,5 +1,5 @@
 'use client';
-import { title } from "@/components/primitives";
+import TableSkeleton from "@/components/skeletons/TableSkeleton";
 import ModalTag from "@/components/tag/ModalTag";
 import { TagContextI, TagI, useTag } from "@/context/TagContext";
 import { Button } from "@nextui-org/button";
@@ -10,8 +10,7 @@ import { EllipsisVertical } from "lucide-react";
 import { useCallback } from "react";
 
 export default function TagPage() {
-    const { tag, deleteTag } = useTag() as TagContextI;
-    console.log("Tag desde page", tag);
+    const { tag, deleteTag, loading } = useTag() as TagContextI;
     const columns = [
         {
             key: "name",
@@ -64,29 +63,31 @@ export default function TagPage() {
     }, []);
 
     return (
-        <section
-        // className="bg-white min-w-full min-h-screen flex flex-col items-center justify-center"
-        >
+        <section>
             <div
                 className="flex justify-end mb-8 "
             >
                 <ModalTag />
             </div>
-            <Table
-                aria-label="tag collection table"
-            >
-                <TableHeader columns={columns} >
-                    {(column) => <TableColumn key={column.key} align="center" >{column.label}</TableColumn>}
-                </TableHeader>
-                <TableBody items={tag} emptyContent={"No existe ninguna etiqueta"} >
-                    {(tag) => (
-                        <TableRow key={tag._id}>
-                            {/* {(columnKey) => <TableCell>{getKeyValue(tag, columnKey)}</TableCell>} */}
-                            {(columnKey) => <TableCell>{renderCell(tag, columnKey as keyof TagI | "actions")}</TableCell>}
-                        </TableRow>
-                    )}
-                </TableBody>
-            </Table>
+            {
+                loading ?
+                    <TableSkeleton /> :
+                    <Table
+                        aria-label="tag collection table"
+                    >
+                        <TableHeader columns={columns} >
+                            {(column) => <TableColumn key={column.key} align="center" >{column.label}</TableColumn>}
+                        </TableHeader>
+                        <TableBody items={tag} emptyContent={"No existe ninguna etiqueta"} >
+                            {(tag) => (
+                                <TableRow key={tag._id}>
+                                    {/* {(columnKey) => <TableCell>{getKeyValue(tag, columnKey)}</TableCell>} */}
+                                    {(columnKey) => <TableCell>{renderCell(tag, columnKey as keyof TagI | "actions")}</TableCell>}
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+            }
         </section>
     );
 }

@@ -15,6 +15,8 @@ export interface TagContextI {
     tag: TagI[];
     addTag: (payload: TagDtoI) => Promise<any>;
     deleteTag: (id: string) => Promise<any>;
+    error: boolean;
+    loading: boolean;
 }
 
 export interface TagDtoI {
@@ -30,6 +32,7 @@ export const TagContextProvider = ({ children }: any) => {
 
     const [tag, setTag] = useState<TagI[]>([]);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true)
     const getTag = async () => {
         if (!user.isAuthenticaded) return;
         try {
@@ -40,6 +43,7 @@ export const TagContextProvider = ({ children }: any) => {
             });
             const data = response.data;
             setTag(data);
+            setLoading(false);
         } catch (error) {
             setError(true);
             console.log(error);
@@ -77,10 +81,10 @@ export const TagContextProvider = ({ children }: any) => {
 
     useEffect(() => {
         getTag();
-    }, [])
+    }, [user])
 
     return (
-        <TagContext.Provider value={{ tag, addTag, deleteTag }}>
+        <TagContext.Provider value={{ tag, addTag, deleteTag, error, loading }}>
             {children}
         </TagContext.Provider>
     )

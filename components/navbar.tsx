@@ -1,16 +1,12 @@
 import {
   Navbar as NextUINavbar,
   NavbarContent,
-  NavbarMenu,
   NavbarMenuToggle,
   NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
+  NavbarItem
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
@@ -22,13 +18,12 @@ import {
   GithubIcon,
   DiscordIcon,
   HeartFilledIcon,
-  SearchIcon,
-  Logo,
 } from "@/components/icons";
 import { UserContextI, useUser } from "@/context/UserContext";
 import { User } from "@nextui-org/user";
-import { LogOut } from "lucide-react";
+import { Link2, LogOut } from "lucide-react";
 import { deleteCookie } from "cookies-next";
+import ProfileSkeleton from "./skeletons/profileSkeleton";
 
 export const Navbar = () => {
   const { user } = useUser() as UserContextI;
@@ -44,8 +39,22 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">EASY URL</p>
+
+            <div>
+              <div
+                className="flex justify-center"
+              >
+                <p>EASY </p>
+                <Link2 />
+                <p>URL</p>
+              </div>
+              <div
+                className="leading-3"
+              >
+                <small className="text-default-500">Manage it easily.</small>
+              </div>
+            </div>
+            {/* <p className="font-bold text-inherit">EASY URL</p> */}
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
@@ -78,21 +87,25 @@ export const Navbar = () => {
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
           {
-            user.isAuthenticaded ?
-              <User
-                name={user.name}
-                description={user.email}
-              />
+            user.loading ?
+              <ProfileSkeleton />
               :
-              <Button
-                as={Link}
-                className="text-sm font-normal text-default-600 bg-default-100"
-                href={siteConfig.navMenuItems[8].href}
-                startContent={<HeartFilledIcon className="text-danger" />}
-                variant="flat"
-              >
-                Login
-              </Button>
+              user.isAuthenticaded ?
+                <User
+                  name={user.name}
+                  description={user.email}
+                />
+                :
+                <Button
+                  as={Link}
+                  className="text-sm font-normal text-default-600 bg-default-100"
+                  href={siteConfig.navMenuItems[8].href}
+                  startContent={<HeartFilledIcon className="text-danger" />}
+                  variant="flat"
+                >
+                  Login
+                </Button>
+
 
           }
         </NavbarItem>

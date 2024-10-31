@@ -35,7 +35,7 @@ export default function SignupPage() {
         e.preventDefault();
         await signUp(values.name.trim(), values.email, values.password.trim());
         if (error) return;
-        router.push('/login');
+        router.push('/welcome');
         setError(false);
     }
 

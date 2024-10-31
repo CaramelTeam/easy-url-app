@@ -28,10 +28,15 @@ export const useValidateInputs = <T extends Record<string, any>>(initialValues: 
         e.target.value = e.target.value.replace(regex, '');
     }
 
+    const handleUrlCharacters = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const regex = /[^a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]/g;
+        e.target.value = e.target.value.replace(regex, '');
+    };
+
     const handleEmptyInputs = (): boolean => {
         const hasEmptyValues = Object.values(values).some(value => !value);
         return hasEmptyValues;
     }
 
-    return { handleOnChange, values, handleEmailInputs, handleSpecialCharacters, handleEmptyInputs }
+    return { handleOnChange, values, handleEmailInputs, handleSpecialCharacters, handleEmptyInputs, handleUrlCharacters }
 }

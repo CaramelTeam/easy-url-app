@@ -37,7 +37,8 @@ export default function RootLayout({
 
   // Condiciona la renderización de Navbar y Footer
   // const isLoginPage = pathname === "/login"; // Verifica si estamos en la ruta /login
-  const routesCommonComponents = ["/login", "/signup"]; // Rutas sin Navbar
+  //TODO: add routesCommonComponents to a constant file
+  const routesCommonComponents = ["/login", "/signup", '/welcome']; // Rutas sin Navbar
 
   return (
     <html suppressHydrationWarning lang="en">
