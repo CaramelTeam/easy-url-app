@@ -10,9 +10,11 @@ export const useValidateInputs = <T extends Record<string, any>>(initialValues: 
     const [values, setValues] = useState<T>(initialValues);
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('values', values);
+
         setValues({
             ...values,
-            [e.target.name]: e.target.value.trim()
+            [e.target.name]: e.target.value
         })
     }
 
@@ -38,5 +40,5 @@ export const useValidateInputs = <T extends Record<string, any>>(initialValues: 
         return hasEmptyValues;
     }
 
-    return { handleOnChange, values, handleEmailInputs, handleSpecialCharacters, handleEmptyInputs, handleUrlCharacters }
+    return { handleOnChange, values, handleEmailInputs, handleSpecialCharacters, handleEmptyInputs, handleUrlCharacters, setValues }
 }

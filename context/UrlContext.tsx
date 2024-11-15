@@ -33,6 +33,8 @@ export interface UrlContextI {
     addUrl: (urlInfo: UrlDtoI) => Promise<any>;
     refetch: () => void;
     deleteUrl: (id: string) => Promise<UrlInfoI>;
+    getUrlById: (id: string) => Promise<UrlInfoI>;
+    updateById: (id: string, payload: UrlDtoI) => Promise<UrlInfoI>
     loading: boolean;
 }
 
@@ -93,6 +95,37 @@ export const UrlContextProvider = ({ children }: any) => {
         }
     }
 
+    const getUrlById = async (id: string) => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/url/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const data = response.data
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const updateById = async (id: string, payload: Partial<UrlDtoI>) => {
+        console.log('Entrando');
+
+        try {
+            const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/url/${id}`, payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const data = response.data
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
 
     useEffect(() => {
@@ -101,7 +134,7 @@ export const UrlContextProvider = ({ children }: any) => {
 
 
     return (
-        <UrlContext.Provider value={{ url, addUrl, refetch: getUrl, deleteUrl, loading }}>
+        <UrlContext.Provider value={{ url, addUrl, refetch: getUrl, deleteUrl, loading, getUrlById, updateById }}>
             {children}
         </UrlContext.Provider>
     )

@@ -1,5 +1,6 @@
 'use client';
 import TableSkeleton from "@/components/skeletons/TableSkeleton";
+import EditModalTag from "@/components/tag/EditModalTag";
 import ModalTag from "@/components/tag/ModalTag";
 import { TagContextI, TagI, useTag } from "@/context/TagContext";
 import { Button } from "@nextui-org/button";
@@ -51,11 +52,12 @@ export default function TagPage() {
                                 </Button>
                             </DropdownTrigger>
                             <DropdownMenu>
-                                <DropdownItem>Edit</DropdownItem>
+                                {/* TODO: manage the way ddropwdown close the modal */}
+                                <DropdownItem>Editar</DropdownItem>
                                 <DropdownItem color="danger" className="text-danger" onClick={() => deleteTag(tag._id)} >Delete</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
-                    </div>
+                    </div >
                 );
             default:
                 return cellValue;
@@ -68,6 +70,7 @@ export default function TagPage() {
                 className="flex justify-end mb-8 "
             >
                 <ModalTag />
+                {/* <EditModalTag /> */}
             </div>
             {
                 loading ?

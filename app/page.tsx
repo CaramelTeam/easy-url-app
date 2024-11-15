@@ -17,6 +17,7 @@ import { useState } from "react";
 import CardSkeleton from "@/components/skeletons/CardSkeleton";
 import { TagContextI, useTag } from "@/context/TagContext";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
+import ModalEditLink from "@/components/home/ModalEditLink";
 
 export default function Home() {
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
@@ -140,9 +141,10 @@ export default function Home() {
                                 <ArrowUpRight />
                               </Link>
                             </Tooltip>
-                            <Button color="secondary" isIconOnly aria-label="Editar" variant="ghost">
+                            {/* <Button color="secondary" isIconOnly aria-label="Editar" variant="ghost">
                               <Pencil />
-                            </Button>
+                            </Button> */}
+                            <ModalEditLink id={url._id} />
                             <Button
                               color="danger"
                               isIconOnly
