@@ -72,7 +72,7 @@ export const TagContextProvider = ({ children }: any) => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            getTag();
+            await getTag();
         } catch (error) {
             setError(true);
             console.log(error);
