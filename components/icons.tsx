@@ -1,29 +1,6 @@
 import * as React from "react";
 
 import { IconSvgProps } from "@/types";
-
-export const Logo: React.FC<IconSvgProps> = ({
-  size = 36,
-  width,
-  height,
-  ...props
-}) => (
-  <svg
-    fill="none"
-    height={size || height}
-    viewBox="0 0 32 32"
-    width={size || width}
-    {...props}
-  >
-    <path
-      clipRule="evenodd"
-      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-      fill="currentColor"
-      fillRule="evenodd"
-    />
-  </svg>
-);
-
 export const DiscordIcon: React.FC<IconSvgProps> = ({
   size = 24,
   width,
@@ -209,6 +186,64 @@ export const NextUILogo: React.FC<IconSvgProps> = (props) => {
       <path
         className="fill-white dark:fill-black"
         d="M17.5667 9.21729H18.8111V18.2403C18.8255 19.1128 18.6 19.9726 18.159 20.7256C17.7241 21.4555 17.0968 22.0518 16.3458 22.4491C15.5717 22.8683 14.6722 23.0779 13.6473 23.0779C12.627 23.0779 11.7286 22.8672 10.9521 22.4457C10.2007 22.0478 9.5727 21.4518 9.13602 20.7223C8.6948 19.9705 8.4692 19.1118 8.48396 18.2403V9.21729H9.72854V18.1538C9.71656 18.8298 9.88417 19.4968 10.2143 20.0868C10.5362 20.6506 11.0099 21.1129 11.5814 21.421C12.1689 21.7448 12.8576 21.9067 13.6475 21.9067C14.4374 21.9067 15.1272 21.7448 15.7169 21.421C16.2895 21.1142 16.7635 20.6516 17.0844 20.0868C17.4124 19.4961 17.5788 18.8293 17.5667 18.1538V9.21729ZM23.6753 9.21729V22.845H22.4309V9.21729H23.6753Z"
+      />
+    </svg>
+  );
+};
+
+export const GoogleIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 48 48"
+      width={size || width}
+      height={size || height}
+      {...props}
+    >
+      <path
+        fill="#4285F4"
+        d="M24 9.5c3.08 0 5.48 1.08 7.16 2.59l5.28-5.28C32.65 3.73 28.69 2 24 2 15.73 2 8.68 7.48 6.15 14.99l6.9 5.37C14.52 13.94 18.87 9.5 24 9.5z"
+      />
+      <path
+        fill="#34A853"
+        d="M24 44c5.54 0 10.18-1.84 13.57-4.98l-6.5-5.1c-1.81 1.22-4.14 1.96-7.07 1.96-5.42 0-10.03-3.65-11.68-8.62l-7.02 5.46C9.22 38.74 16.05 44 24 44z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M42 24.5c0-1.13-.1-2.24-.31-3.31H24v7.02h10.32c-.45 2.3-1.77 4.25-3.65 5.56l6.5 5.1C40.69 35.98 42 30.54 42 24.5z"
+      />
+      <path
+        fill="#EA4335"
+        d="M13.32 27.26C12.97 26.14 12.75 25.09 12.75 24s.22-2.14.57-3.26l-6.9-5.37C4.82 18.22 4 21.03 4 24s.82 5.78 2.42 8.63l6.9-5.37z"
+      />
+    </svg>
+  );
+};
+
+export const XIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size || width}
+      height={size || height}
+      {...props}
+    >
+      <path
+        d="M3 3l18 18M3 21L21 3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );

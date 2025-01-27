@@ -1,56 +1,167 @@
+"use client";
 import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
 import { button as buttonStyles } from "@nextui-org/theme";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
+import { ArrowUpRight, Bookmark, Link as LinkLucide, ListCollapse, Pencil, Trash } from "lucide-react";
+import { Tooltip } from "@nextui-org/tooltip";
+import { Chip } from "@nextui-org/chip";
+import { UrlContextI, useUrl } from "../context/UrlContext";
+import ModalHome from "@/components/home/ModalHome";
+import { useState } from "react";
+import CardSkeleton from "@/components/skeletons/CardSkeleton";
+import { TagContextI, useTag } from "@/context/TagContext";
+import { Accordion, AccordionItem } from "@nextui-org/accordion";
+import ModalEditLink from "@/components/home/ModalEditLink";
 
 export default function Home() {
+  const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
+
+  const collapseAll = () => {
+    setExpandedKeys([]);
+  };
+
+  const { url, deleteUrl, loading } = useUrl() as UrlContextI;
+  const { tag } = useTag() as TagContextI;
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteUrl(id);
+    } catch (error) {
+      console.log("Error from delete url:", error);
+    }
+  }
+
+
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
+    <section>
+      <div
+        className="flex justify-between items-center mb-4"
+      >
+        <div>
+          <Tooltip
+            key={'collapse-all'}
+            color="primary"
+            content="Colapsar todo"
+            className="Capitalized"
+          >
+            <Button
+              isIconOnly
+              aria-label="Collapse All"
+              onClick={collapseAll}
+              variant="light"
+            >
+              <ListCollapse />
+            </Button>
+          </Tooltip>
+        </div>
+        <div>
+          <ModalHome />
         </div>
       </div>
 
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
+      <Accordion
+        selectionMode="multiple"
+        showDivider={false}
+        onSelectionChange={(keysValue) => {
+          console.log('Keys value:', keysValue);
+          setExpandedKeys(Array.from(keysValue) as string[]);
+        }}
 
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
-      </div>
+        selectedKeys={expandedKeys}
+      >
+        {
+          url.map((item) => (
+            <AccordionItem
+              key={item._id}
+              className="mb-4"
+              title={item._id}
+              style={{
+                borderBottom: "1px solid",
+                borderColor: tag.find((t) => t.name === item._id)?.color || "gray"
+              }}
+              startContent={
+                <div
+                  className="flex justify-start mb-4 mt-4"
+                >
+                  <Bookmark
+                    color={tag.find((t) => t.name === item._id)?.color || "gray"}
+
+                  />
+                </div>
+              }
+              indicator={
+                <LinkLucide
+                  color={tag.find((t) => t.name === item._id)?.color || "gray"}
+                />
+              }
+            >
+              {
+                <div className="flex items-center justify-center grid md:grid-cols-4 gap-4 mt-4 mb-4">
+                  {
+                    loading ?
+                      <CardSkeleton /> :
+                      item.urls.map((url) => (
+                        //Adding a max and min wid
+                        <Card className="max-w-[400px] min-h-[300px]" key={url._id}
+                        >
+                          <CardHeader className="flex flex-col gap-3">
+                            <div>
+                              <p className="text-md">{url.title}</p>
+                            </div>
+                            <div className="flex ml-auto">
+                              <Chip color="primary" variant="dot">{url?.tag}</Chip>
+                            </div>
+                          </CardHeader>
+                          <Divider />
+                          <CardBody>
+                            <p>{url?.description}</p>
+                          </CardBody>
+                          <Divider />
+                          <CardFooter
+                            className="flex gap-3"
+                            style={{
+                              padding: "1.5rem 1.5rem",
+                            }}
+                          >
+                            <Tooltip showArrow content="Visitar" placement="bottom" color="primary">
+                              <Link
+                                target="_blank"
+                                className={buttonStyles({ variant: "shadow", radius: "full", color: "primary" })}
+                                href={url.url.startsWith("http") ? url.url : url.url.startsWith("https") ? url.url : `https://${url.url}`}
+                              >
+                                <ArrowUpRight />
+                              </Link>
+                            </Tooltip>
+                            {/* <Button color="secondary" isIconOnly aria-label="Editar" variant="ghost">
+                              <Pencil />
+                            </Button> */}
+                            <ModalEditLink id={url._id} />
+                            <Button
+                              color="danger"
+                              isIconOnly
+                              aria-label="Eliminar"
+                              variant="ghost"
+                              onClick={() => handleDelete(url?._id)}
+                              className="group"
+                            >
+                              <Trash className="group-hover:text-white text-danger" />
+                            </Button>
+                          </CardFooter>
+                        </Card>
+                      ))
+                  }
+                </div>
+              }
+            </AccordionItem>
+          ))
+        }
+      </Accordion>
+
     </section>
   );
 }
