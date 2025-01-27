@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import { UrlContextI, useUrl } from "@/context/UrlContext";
 import { useState } from "react";
 import { TagContextI, TagDtoI, useTag } from "@/context/TagContext";
+import { Link } from "@nextui-org/link";
 
 export default function EditModalTag() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -39,7 +40,8 @@ export default function EditModalTag() {
     return (
         <>
             {/* <Button startContent={<Plus />} onPress={onOpen}>Open Modal</Button> */}
-            <Button radius="full" aria-label="Edit tag content" color="primary" variant="shadow" onPress={onOpen}>Editar</Button>
+            {/* <Button variant="light" aria-label="Edit tag content" as={'a'} onPress={onOpen}>Editar</Button> */}
+            <Link as={'button'} size="sm" className="text-default-800 w-full" onPress={onOpen}>Editar</Link>
             {/* <Button isIconOnly color="primary" variant="shadow" onPress={onOpen}><Plus /></Button> */}
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} aria-label="Edit tag content">
                 <form

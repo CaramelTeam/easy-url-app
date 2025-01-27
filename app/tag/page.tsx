@@ -53,7 +53,7 @@ export default function TagPage() {
                             </DropdownTrigger>
                             <DropdownMenu>
                                 {/* TODO: manage the way ddropwdown close the modal */}
-                                <DropdownItem>Editar</DropdownItem>
+                                <DropdownItem closeOnSelect={false} ><EditModalTag /></DropdownItem>
                                 <DropdownItem color="danger" className="text-danger" onClick={() => deleteTag(tag._id)} >Delete</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>

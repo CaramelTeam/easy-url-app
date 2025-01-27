@@ -23,10 +23,7 @@ export default function Home() {
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
 
   const collapseAll = () => {
-    console.log("Collapse all: ");
     setExpandedKeys([]);
-    console.log('Expanded keys:', expandedKeys);
-
   };
 
   const { url, deleteUrl, loading } = useUrl() as UrlContextI;
@@ -85,8 +82,7 @@ export default function Home() {
               title={item._id}
               style={{
                 borderBottom: "1px solid",
-                borderColor: tag.find((t) => t.name === item._id)?.color || "gray",
-                borderRadius: ".5rem",
+                borderColor: tag.find((t) => t.name === item._id)?.color || "gray"
               }}
               startContent={
                 <div
@@ -153,7 +149,7 @@ export default function Home() {
                               onClick={() => handleDelete(url?._id)}
                               className="group"
                             >
-                              <Trash className="group-hover:text-white" />
+                              <Trash className="group-hover:text-white text-danger" />
                             </Button>
                           </CardFooter>
                         </Card>
