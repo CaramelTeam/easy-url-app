@@ -141,12 +141,12 @@ export default function LoginPage() {
                 <CardFooter>
                     <div
                         className="flex justify-center gap-4 w-full h-12"
-
                     >
                         <Button
                             isIconOnly
                             variant="light"
                             aria-label='github'
+                            isDisabled
                         >
                             <GithubIcon />
                         </Button>
@@ -155,6 +155,7 @@ export default function LoginPage() {
                             // color=""
                             variant="light"
                             aria-label='google'
+                            isDisabled
                         >
                             <GoogleIcon />
                         </Button>
@@ -163,6 +164,7 @@ export default function LoginPage() {
                             // color=""
                             variant="light"
                             aria-label='google'
+                            isDisabled
                         >
                             {/* <XIcon /> */}
                             {/* <TwitterIcon /> */}
