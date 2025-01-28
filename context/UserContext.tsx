@@ -49,8 +49,14 @@ export const UserContextProvider = ({ children }: any) => {
 
     const login = async (email: string, password: string) => {
         try {
+            setUser({
+                ...user,
+                loading: true
+            })
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, { email, password })
             const data = response.data
+            console.log('Data: ', data);
+
             setCookie('currentUser', data.token, {
                 path: '/',
                 maxAge: 24 * 60 * 60, // 24 hours
@@ -69,6 +75,10 @@ export const UserContextProvider = ({ children }: any) => {
             setError(false)
             return response;
         } catch (error) {
+            setUser({
+                ...user,
+                loading: false
+            })
             setError(true)
             console.log(error)
             return error;
