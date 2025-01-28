@@ -64,5 +64,6 @@ ENV PORT=3001
 # https://nextjs.org/docs/pages/api-reference/config/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
 ENV NEXT_PUBLIC_API_URL=http://easy-lb-1716204210.us-east-2.elb.amazonaws.com/api
+ENV API_URL=http://easy-lb-1716204210.us-east-2.elb.amazonaws.com/api
 
 CMD ["node", "app/server.js"]
