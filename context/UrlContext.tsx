@@ -3,6 +3,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContextI, useUser } from "./UserContext";
 import { getCookie } from "cookies-next";
+import { BASE_URL } from "@/constants";
 interface UrlInfoI {
     _id: string;
     title: string;
@@ -46,7 +47,7 @@ export const UrlContextProvider = ({ children }: any) => {
     const getUrl = async () => {
         if (!user.isAuthenticaded) return;
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/url`, {
+            const response = await axios.get(`${BASE_URL}/url`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
@@ -69,7 +70,7 @@ export const UrlContextProvider = ({ children }: any) => {
 
     const addUrl = async (urlInfo: UrlDtoI) => {
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/url`, urlInfo, {
+            await axios.post(`${BASE_URL}/url`, urlInfo, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -82,7 +83,7 @@ export const UrlContextProvider = ({ children }: any) => {
 
     const deleteUrl = async (id: string) => {
         try {
-            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/url/${id}`, {
+            const response = await axios.delete(`${BASE_URL}/url/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -97,7 +98,7 @@ export const UrlContextProvider = ({ children }: any) => {
 
     const getUrlById = async (id: string) => {
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/url/${id}`, {
+            const response = await axios.get(`${BASE_URL}/url/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -113,7 +114,7 @@ export const UrlContextProvider = ({ children }: any) => {
         console.log('Entrando');
 
         try {
-            const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/url/${id}`, payload, {
+            const response = await axios.patch(`${BASE_URL}/url/${id}`, payload, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

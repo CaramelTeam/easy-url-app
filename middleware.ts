@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { NextResponse, type NextRequest } from 'next/server'
+import { BASE_URL } from './constants';
 const isValidToken = async (token: string | undefined) => {
     if (token === undefined) return false;
-    const response: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/validate`, {
+    const response: AxiosResponse = await axios.post(`${BASE_URL}/auth/validate`, {
         token
     }, {
         validateStatus: function (status) {
