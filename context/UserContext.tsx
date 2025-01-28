@@ -53,6 +53,8 @@ export const UserContextProvider = ({ children }: any) => {
                 ...user,
                 loading: true
             })
+            console.log('ENV: ', process.env.NEXT_PUBLIC_API_URL);
+
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, { email, password })
             const data = response.data
             console.log('Data desde context: ', data);
