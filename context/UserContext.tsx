@@ -55,7 +55,7 @@ export const UserContextProvider = ({ children }: any) => {
             })
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, { email, password })
             const data = response.data
-            console.log('Data: ', data);
+            console.log('Data desde context: ', data);
 
             setCookie('currentUser', data.token, {
                 path: '/',
