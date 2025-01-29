@@ -54,13 +54,8 @@ export const UserContextProvider = ({ children }: any) => {
                 ...user,
                 loading: true
             })
-            console.log('ENV: ', process.env.NEXT_PUBLIC_API_URL);
-            console.log('ENV: ', process.env.API_URL);
-
             const response = await axios.post(`${BASE_URL}/auth/login`, { email, password })
-            const data = response.data
-            console.log('Data desde context: ', data);
-
+            const data = response.data;
             setCookie('currentUser', data.token, {
                 path: '/',
                 maxAge: 24 * 60 * 60, // 24 hours

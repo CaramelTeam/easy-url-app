@@ -1,1 +1,1 @@
-export const BASE_URL = "http://easy-lb-1716204210.us-east-2.elb.amazonaws.com/api"
+export const BASE_URL = "https://linkhub.softizi.com/api"

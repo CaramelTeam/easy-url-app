@@ -131,7 +131,8 @@ export default function LoginPage() {
                             color="primary"
                             variant="shadow"
                             type="submit"
-                            isDisabled={handleEmptyInputs() || user.loading}
+                            isDisabled={handleEmptyInputs()}
+                            isLoading={user.loading}
                         >
                             Iniciar sesión
                         </Button>
