@@ -27,7 +27,7 @@ export default function SignupPage() {
         email: '',
         password: ''
     });
-    const { signUp, error, setError } = useUser() as UserContextI;
+    const { signUp, error, setError, user } = useUser() as UserContextI;
     const router = useRouter();
 
 
@@ -114,6 +114,7 @@ export default function SignupPage() {
                         type="submit"
                         className="my-2"
                         isDisabled={handleEmptyInputs()}
+                        isLoading={user.loading}
                     >
                         Registrar
                     </Button>
