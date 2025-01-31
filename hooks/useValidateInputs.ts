@@ -8,10 +8,7 @@ export enum ValidateType {
 
 export const useValidateInputs = <T extends Record<string, any>>(initialValues: T) => {
     const [values, setValues] = useState<T>(initialValues);
-
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('values', values);
-
         setValues({
             ...values,
             [e.target.name]: e.target.value

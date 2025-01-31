@@ -23,7 +23,7 @@ export default function LoginPage() {
     });
 
     const [isVisible, setIsVisible] = useState(false);
-    const { login, error, setError } = useUser() as UserContextI;
+    const { login, error, setError, user } = useUser() as UserContextI;
     const toggleVisibility = () => setIsVisible(!isVisible);
 
     const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -132,6 +132,7 @@ export default function LoginPage() {
                             variant="shadow"
                             type="submit"
                             isDisabled={handleEmptyInputs()}
+                            isLoading={user.loading}
                         >
                             Iniciar sesión
                         </Button>

@@ -11,15 +11,15 @@ export default function WelcomePage() {
             <div
                 className="mb-4"
             >
-                <h1 className={`text-5xl font-bold text-primary`} >¡Gracias por registrarte en Easy Url!</h1>
+                <h1 className={`text-3xl font-bold text-primary`} >¡Gracias por registrarte en LinkHub!</h1>
             </div>
             <div
                 className="mb-4 text-center"
             >
                 <p className="text-lg" >Nos alegra que te unas a nuestra plataforma de gestión de URLs.</p>
-                <p className="text-lg" >Tendrás acceso a herramientas que harán que el manejo y la organización de tus enlaces sea más fácil y eficiente.</p>
-                <p className="text-lg" >Explora nuestras funciones para organizar tus URLs de manera rápida y segura.</p>
-                <p className="text-lg " >Nuestro equipo trabaja constantemente en mejorar y actualizar la plataforma, añadiendo nuevas funciones y optimizando la experiencia para que siempre tengas las mejores herramientas a tu alcance.</p>
+                <p className="text-lg" >Tendrás acceso a herramientas que harán que el manejo y la organización de tus enlaces sea más fácil y practico.</p>
+                {/* <p className="text-lg" >Explora nuestras funciones para organizar tus URLs de manera rápida y segura.</p>
+                <p className="text-lg " >Nuestro equipo trabaja constantemente en mejorar y actualizar la plataforma, añadiendo nuevas funciones y optimizando la experiencia para que siempre tengas las mejores herramientas a tu alcance.</p> */}
             </div>
             <Divider />
             <div

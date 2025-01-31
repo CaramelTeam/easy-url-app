@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/constants";
 import axios from "axios";
 import { setCookie, getCookie } from "cookies-next";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -49,8 +50,12 @@ export const UserContextProvider = ({ children }: any) => {
 
     const login = async (email: string, password: string) => {
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, { email, password })
-            const data = response.data
+            setUser({
+                ...user,
+                loading: true
+            })
+            const response = await axios.post(`${BASE_URL}/auth/login`, { email, password })
+            const data = response.data;
             setCookie('currentUser', data.token, {
                 path: '/',
                 maxAge: 24 * 60 * 60, // 24 hours
@@ -69,6 +74,10 @@ export const UserContextProvider = ({ children }: any) => {
             setError(false)
             return response;
         } catch (error) {
+            setUser({
+                ...user,
+                loading: false
+            })
             setError(true)
             console.log(error)
             return error;
@@ -77,7 +86,7 @@ export const UserContextProvider = ({ children }: any) => {
 
     const signUp = async (name: string, email: string, password: string) => {
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, { name, email, password })
+            await axios.post(`${BASE_URL}/user`, { name, email, password })
             setError(false)
         } catch (error) {
             setError(true)

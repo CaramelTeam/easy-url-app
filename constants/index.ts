@@ -1,0 +1,1 @@
+export const BASE_URL = "https://linkhub.softizi.com/api"

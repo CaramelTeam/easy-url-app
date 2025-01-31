@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContextI, useUser } from "./UserContext";
 import { getCookie } from "cookies-next";
+import { BASE_URL } from "@/constants";
 
 export interface TagI {
     _id: string;
@@ -36,7 +37,7 @@ export const TagContextProvider = ({ children }: any) => {
     const getTag = async () => {
         if (!user.isAuthenticaded) return;
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/tags`, {
+            const response = await axios.get(`${BASE_URL}/tags`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -52,7 +53,7 @@ export const TagContextProvider = ({ children }: any) => {
 
     const addTag = async (payload: TagDtoI) => {
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/tags`, payload, {
+            const response = await axios.post(`${BASE_URL}/tags`, payload, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -67,7 +68,7 @@ export const TagContextProvider = ({ children }: any) => {
 
     const deleteTag = async (id: string) => {
         try {
-            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/tags/${id}`, {
+            await axios.delete(`${BASE_URL}/tags/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
