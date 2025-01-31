@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - feature/ci-cd
+      - dev
 
 jobs:
   build:
